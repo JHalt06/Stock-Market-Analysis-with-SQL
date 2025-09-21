@@ -1,4 +1,36 @@
-venv/
+#Python
 __pycache__/
-*.__pycache__
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+#Virtual Environment
+venv/
+ENV/
+env/
+.venv/
+
+#Environment Variables
 .env
+.env.*
+
+#OS/Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+#Database Dumps
+*.sql
+*.sqlite
+*.db
+
+#Temporary Files
+*.tmp
+*.temp
