@@ -53,11 +53,11 @@ try:
     )
     cur = conn.cursor() # A cursor lets you execute SQL commands through the connection
     #use cur.execute() to send SQL statements to the database
-    for _, row in df.iterrows: #Go through each row of the pandas DataFrame df
+    for _, row in df.iterrows(): #Go through each row of the pandas DataFrame df
 #itterrows() returns (index, row) pairs. _ ignores the index since you don't need it here
 #row is a pandas Series containing the data for one timestamp
         cur.execute("""
-            INSERT INTO stock_prices(symbol,timestamp,open,high,low,close,volume)
+            INSERT INTO stock_data(symbol,timestamp,open,high,low,close,volume)
                 VALUES(%s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (symbol, timestamp) DO NOTHING;
         """, ( #This is a tuple of actual values from the DataFrame row:
@@ -68,11 +68,11 @@ try:
             row["low"],
             row["close"],
             row["volume"],
-        ))
+        )) #passes the row[] column of that specific row into the %s. 
     conn.commit() #Saves changes made in this session to the database
     cur.close()
     conn.close()
-    print(f"Inserted {len(df)} rows for {symbol}")
+    print(f"Inserted {len(df)} rows for {symbol}") #Ex: Inserted 4032 rows for AAPL
 
 except Exception as e:
     print("Error inserting the data:", e)
